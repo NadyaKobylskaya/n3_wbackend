@@ -42,11 +42,11 @@ if (empty($_POST['mail'])) {
 
     switch($_POST['gend']) {
         case 'm': {
-            $sex='m';
+            $gend='m';
             break;
         }
         case 'f':{
-            $sex='f';
+            $gend='f';
             break;
         }
     };
