@@ -16,14 +16,14 @@
         <form method="POST" class="row mx-5 my-2 gy-1">
             <div class="form_item form-group">
                 <label for="formName" style="color: black;">Имя:</label>
-                <input type="text" class="form_input _req form-control w-50 shadow bg-white rounded" name="name"
+                <input type="text" class="form_input _req form-control w-50 shadow bg-white rounded" name="fio"
                     id="formName" placeholder="Enter Username">
             </div>
 
             <div class="form_item form-group">
                 <label for="formEmail" style="color: black;">E-mail:</label>
                 <input type="email" class="form_input _req _email form-control w-50 shadow bg-white rounded"
-                    id="formEmail" name="email" placeholder="Enter E-mail:">
+                    id="formEmail" name="mail" placeholder="Enter E-mail:">
             </div>
 
             <div class="form_item form-group">
@@ -35,11 +35,11 @@
             <div class="form_item form-group">
                 <label for="formSex" style="color: black;">Пол:</label></br>
                 <div class="form-check1 form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="Sex1" value="m">
+                    <input class="form-check-input" type="radio" name="gend" id="Sex1" value="m">
                     <label class="form-check-label" for="Radio1">Мужской</label>
                 </div>
                 <div class="form-check1 form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="Sex2" value="f">
+                    <input class="form-check-input" type="radio" name="gend" id="Sex2" value="f">
                     <label class="form-check-label" for="Radio2">Женский</label>
                 </div>
             </div>
@@ -66,11 +66,19 @@
 
             <div class="form_item form-group">
                 <label for="Superpower" style="color: black;">Сверхспособности:</label>
-                <div id="multipleSuper" name="Superpowers[]">
-                    <input type="checkbox" value="fly">Летать<br>
-                    <input type="checkbox" value="transparency">Прохождение сквозь стены<br>
-                    <input type="checkbox" value="get5">"Сдача сесии"<br>
-                    <input type="checkbox" value="mindreading">Чтение мыслей
+                <div multiple class="form_input _req form-control w-50 shadow bg-white rounded">
+                    <div class="form-check1 form-check-inline">
+                        <input class="form-check-input" name="super" value="bess" type="checkbox" id="r1">
+                        <label class="form-check-label" for="Radi1">Бессмертие</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" name="super" value="passing" type="checkbox" id="r2">
+                        <label class="form-check-label" for="Radi2">Прохожление сквозь стены</label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" name="super" value="fly" type="checkbox" id="r3">
+                        <label class="form-check-label" for="Radi3">Левитация</label>
+                    </div>
                 </div>
             </div>
 
