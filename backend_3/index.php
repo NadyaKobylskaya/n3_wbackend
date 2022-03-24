@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 // Проверяем ошибки.
 $errors = FALSE;
 if (empty($_POST['fio'])) {
-  print('Заполните поле "ФИО".<br/>');
+  print('Заполните поле "Имя".<br/>');
   $errors = TRUE;
 }
 
@@ -76,15 +76,26 @@ if (empty($_POST['mail'])) {
         }
     };
 
-    if (empty($_POST['Superpowers'])) {
-        print('Укажите хоть одну суперспособность.<br/>');
+    if (empty($_POST['super'])) {
+        print('Укажите хотя бы одну суперспособность.<br/>');
         $errors = TRUE;
     }
-
-    $power1=in_array('fly',$_POST['Superpowers']) ? '1' : '0';
-    $power2=in_array('transparency',$_POST['Superpowers']) ? '1' : '0';
-    $power3=in_array('get5',$_POST['Superpowers']) ? '1' : '0';
-    $power4=in_array('mindreading',$_POST['Superpowers']) ? '1' : '0';
+    
+    switch($_POST['super']) {
+        case 'Бессмертие': {
+            $super='Бессмертие';
+            break;
+        }
+        case 'Прохожление сквозь стены':{
+            $super='Прохожление сквозь стены';
+            break;
+        }
+        case 'Левитация':{
+            $super='Левитация';
+            break;
+        }
+    };
+    
 
     if (empty($_POST['biography'])) {
         print('Заполните поле "Биография".<br/>');
@@ -110,8 +121,8 @@ $pass = '2343433';
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application SET fio = ?, mail = ?, date = ? ,gend = ?, limbs = ?, fly = ?, transparency = ? ,get5 = ?, mindreading = ?, biography = ?, agree = ?");
-  $stmt -> execute(array($_POST['fio'],$_POST['mail'],$_POST['date'],$gend,$limbs,$power1,$power2,$power3, $power4, $_POST['biography'], $agree)));
+  $stmt = $db->prepare("INSERT INTO application SET fio = ?, mail = ?, date = ? ,gend = ?, limbs = ?, super = ?, biography = ?, agree = ?");
+  $stmt -> execute(array($_POST['fio'],$_POST['mail'],$_POST['date'],$gend,$limbs,$super, $_POST['biography'], $agree)));
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
