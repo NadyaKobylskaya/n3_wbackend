@@ -1,10 +1,7 @@
 <?php
-// Отправляем браузеру правильную кодировку,
-// файл index.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
 
-// В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
-// и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   // В суперглобальном массиве $_GET PHP хранит все параметры, переданные в текущем запросе через URL.
   if (!empty($_GET['save'])) {
@@ -12,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     print('Спасибо, данные сохранены.');
   }
   // Включаем содержимое файла form.php.
-  include('index.html');
+  include('form.html');
   // Завершаем работу скрипта.
   exit();
 }
@@ -35,12 +32,12 @@ if (empty($_POST['mail'])) {
         $errors = TRUE;
     }
 
-    if ( empty($_POST['sex']) ) {
+    if ( empty($_POST['gend']) ) {
         print('Укажите пол.<br/>');
         $errors = TRUE;
     }
 
-    switch($_POST['sex']) {
+    switch($_POST['gend']) {
         case 'm': {
             $sex='m';
             break;
@@ -84,7 +81,7 @@ if (empty($_POST['mail'])) {
     $power1=in_array('fly',$_POST['Superpowers']) ? '1' : '0';
     $power2=in_array('transparency',$_POST['Superpowers']) ? '1' : '0';
     $power3=in_array('get5',$_POST['Superpowers']) ? '1' : '0';
-    $power4=in_array('mind reading',$_POST['Superpowers']) ? '1' : '0';
+    $power4=in_array('mindreading',$_POST['Superpowers']) ? '1' : '0';
 
     if (empty($_POST['biography'])) {
         print('Заполните поле "Биография".<br/>');
@@ -110,33 +107,12 @@ $db = new PDO('mysql:host=localhost;dbname=test', $user, $pass, array(PDO::ATTR_
 
 // Подготовленный запрос. Не именованные метки.
 try {
-  $stmt = $db->prepare("INSERT INTO application SET fio = ?, mail = ?, date = ? ,sex = ?, limbs = ?, fly = ?, transparency = ? ,get5 =?,mind reading = ?, biography = ?, agree = ?");
+  $stmt = $db->prepare("INSERT INTO application SET fio = ?, mail = ?, date = ? ,gend = ?, limbs = ?, fly = ?, transparency = ? ,get5 =?,mindreading = ?, biography = ?, agree = ?");
   $stmt -> execute(array($_POST['fio'],$_POST['mail'],$_POST['date'],$sex,$limbs,$power1,$power2,$power3, $power4, $_POST['biography'], $agree)));
 }
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
 }
-
-//  stmt - это "дескриптор состояния".
- 
-//  Именованные метки.
-//$stmt = $db->prepare("INSERT INTO test (label,color) VALUES (:label,:color)");
-//$stmt -> execute(array('label'=>'perfect', 'color'=>'green'));
- 
-//Еще вариант
-/*$stmt = $db->prepare("INSERT INTO users (firstname, lastname, email) VALUES (:firstname, :lastname, :email)");
-$stmt->bindParam(':firstname', $firstname);
-$stmt->bindParam(':lastname', $lastname);
-$stmt->bindParam(':email', $email);
-$firstname = "John";
-$lastname = "Smith";
-$email = "john@test.com";
-$stmt->execute();
-*/
-
-// Делаем перенаправление.
-// Если запись не сохраняется, но ошибок не видно, то можно закомментировать эту строку чтобы увидеть ошибку.
-// Если ошибок при этом не видно, то необходимо настроить параметр display_errors для PHP.
 header('Location: ?save=1');
     ?>
