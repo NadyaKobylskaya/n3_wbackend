@@ -1,0 +1,23 @@
+body{
+    background-color: #f0a7ff31;
+    font-size:16px;
+    font-family: 'Times New Roman', serif;
+    align-content: center
+}
+
+.submit{
+    width: 50%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    border-radius: 20px; 
+    background-color: rgb(197, 191, 255);
+
+}
+.c{
+    color: blue;
+}
